@@ -1,13 +1,13 @@
 <x-guest-layout>
     <!-- Header -->
-    <div class="mb-8">
-        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center text-white font-heading font-bold text-2xl shadow-lg mb-6">
+    <div class="mb-8 mt-12">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center text-white font-heading font-bold text-2xl shadow-lg mb-6" style="background: linear-gradient(to bottom right, #0d9488, #10b981);">
             H
         </div>
-        <h2 class="text-3xl font-heading font-bold text-gray-900">
+        <h2 class="text-3xl font-heading font-black text-gray-900 tracking-tight">
             Welcome Back
         </h2>
-        <p class="mt-2 text-sm text-gray-600">
+        <p class="mt-2 text-sm text-gray-600 font-medium">
             Sign in to your HireMate LK account to continue
         </p>
     </div>
@@ -18,11 +18,11 @@
     <form method="POST" action="{{ route('login') }}" class="space-y-6">
         @csrf
 
-        <!-- Email or Phone Number -->
+        <!-- Phone Number -->
         <div>
-            <label for="login_id" class="block text-sm font-medium text-gray-700">{{ __('Email or Phone Number') }}</label>
+            <label for="login_id" class="block text-sm font-medium text-gray-700">{{ __('Phone Number') }}</label>
             <div class="mt-1">
-                <input id="login_id" type="text" name="login_id" value="{{ old('login_id') }}" required autofocus autocomplete="username" 
+                <input id="login_id" type="tel" name="login_id" value="{{ old('login_id') }}" required autofocus autocomplete="username" placeholder="07XXXXXXXX"
                     class="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-brand-500 focus:border-brand-500 sm:text-sm transition-colors">
             </div>
             <x-input-error :messages="$errors->get('login_id')" class="mt-2" />

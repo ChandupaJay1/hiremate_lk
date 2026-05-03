@@ -1,13 +1,13 @@
 <x-guest-layout>
     <!-- Header -->
-    <div class="mb-6">
-        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center text-white font-heading font-bold text-2xl shadow-lg mb-6">
+    <div class="mb-6 mt-12">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center text-white font-heading font-bold text-2xl shadow-lg mb-6" style="background: linear-gradient(to bottom right, #0d9488, #10b981);">
             H
         </div>
-        <h2 class="text-3xl font-heading font-bold text-gray-900">
+        <h2 class="text-3xl font-heading font-black text-gray-900 tracking-tight">
             Join HireMate LK
         </h2>
-        <p class="mt-2 text-sm text-gray-600">
+        <p class="mt-2 text-sm text-gray-600 font-medium">
             Connect with skilled workers or find work opportunities
         </p>
     </div>
@@ -60,39 +60,86 @@
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
-        <!-- Job Name (Only for Workers) -->
-        <div id="job_name_container" style="display: none;">
-            <label for="job_name" class="block text-sm font-medium text-gray-700">Job Name</label>
-            <div class="mt-1">
-                <select id="job_name" name="job_name" class="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm bg-white focus:outline-none focus:ring-brand-500 focus:border-brand-500 sm:text-sm transition-colors">
-                    <option value="" disabled selected>Select your profession</option>
-                    <option value="Mason" {{ old('job_name') == 'Mason' ? 'selected' : '' }}>Mason</option>
-                    <option value="Electrician" {{ old('job_name') == 'Electrician' ? 'selected' : '' }}>Electrician</option>
-                    <option value="Plumber" {{ old('job_name') == 'Plumber' ? 'selected' : '' }}>Plumber</option>
-                    <option value="Carpenter" {{ old('job_name') == 'Carpenter' ? 'selected' : '' }}>Carpenter</option>
-                    <option value="Painter" {{ old('job_name') == 'Painter' ? 'selected' : '' }}>Painter</option>
-                    <option value="Cleaner" {{ old('job_name') == 'Cleaner' ? 'selected' : '' }}>Cleaner</option>
-                    <option value="Other" {{ old('job_name') == 'Other' ? 'selected' : '' }}>Other</option>
-                </select>
+        <!-- Worker-only fields -->
+        <div id="worker_fields_container" style="display: none;" class="space-y-5">
+            <!-- Job Name -->
+            <div>
+                <label for="job_name" class="block text-sm font-medium text-gray-700">{{ __('auth.job_name') ?? 'Job Name' }}</label>
+                <div class="mt-1">
+                    <select id="job_name" name="job_name" class="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm bg-white focus:outline-none focus:ring-brand-500 focus:border-brand-500 sm:text-sm transition-colors">
+                        <option value="" disabled selected>{{ __('auth.select_profession') ?? 'Select your profession' }}</option>
+                        <option value="Mason" {{ old('job_name') == 'Mason' ? 'selected' : '' }}>Mason</option>
+                        <option value="Electrician" {{ old('job_name') == 'Electrician' ? 'selected' : '' }}>Electrician</option>
+                        <option value="Plumber" {{ old('job_name') == 'Plumber' ? 'selected' : '' }}>Plumber</option>
+                        <option value="Carpenter" {{ old('job_name') == 'Carpenter' ? 'selected' : '' }}>Carpenter</option>
+                        <option value="Painter" {{ old('job_name') == 'Painter' ? 'selected' : '' }}>Painter</option>
+                        <option value="Cleaner" {{ old('job_name') == 'Cleaner' ? 'selected' : '' }}>Cleaner</option>
+                        <option value="Driver" {{ old('job_name') == 'Driver' ? 'selected' : '' }}>Driver</option>
+                        <option value="Mechanic" {{ old('job_name') == 'Mechanic' ? 'selected' : '' }}>Mechanic</option>
+                        <option value="Gardener" {{ old('job_name') == 'Gardener' ? 'selected' : '' }}>Gardener</option>
+                        <option value="Security Guard" {{ old('job_name') == 'Security Guard' ? 'selected' : '' }}>Security Guard</option>
+                        <option value="Welder" {{ old('job_name') == 'Welder' ? 'selected' : '' }}>Welder</option>
+                        <option value="AC Technician" {{ old('job_name') == 'AC Technician' ? 'selected' : '' }}>AC Technician</option>
+                        <option value="Other" {{ old('job_name') == 'Other' ? 'selected' : '' }}>Other</option>
+                    </select>
+                </div>
+                <x-input-error :messages="$errors->get('job_name')" class="mt-2" />
             </div>
-            <x-input-error :messages="$errors->get('job_name')" class="mt-2" />
+
+            <!-- Province -->
+            <div>
+                <label for="province" class="block text-sm font-medium text-gray-700">{{ __('auth.province') ?? 'Province' }}</label>
+                <div class="mt-1">
+                    <select id="province" name="province" class="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm bg-white focus:outline-none focus:ring-brand-500 focus:border-brand-500 sm:text-sm transition-colors" onchange="filterDistricts(this.value)">
+                        <option value="" disabled selected>{{ __('auth.select_province') ?? 'Select your province' }}</option>
+                        <option value="Western" {{ old('province') == 'Western' ? 'selected' : '' }}>Western Province</option>
+                        <option value="Central" {{ old('province') == 'Central' ? 'selected' : '' }}>Central Province</option>
+                        <option value="Southern" {{ old('province') == 'Southern' ? 'selected' : '' }}>Southern Province</option>
+                        <option value="Northern" {{ old('province') == 'Northern' ? 'selected' : '' }}>Northern Province</option>
+                        <option value="Eastern" {{ old('province') == 'Eastern' ? 'selected' : '' }}>Eastern Province</option>
+                        <option value="North Western" {{ old('province') == 'North Western' ? 'selected' : '' }}>North Western Province</option>
+                        <option value="North Central" {{ old('province') == 'North Central' ? 'selected' : '' }}>North Central Province</option>
+                        <option value="Uva" {{ old('province') == 'Uva' ? 'selected' : '' }}>Uva Province</option>
+                        <option value="Sabaragamuwa" {{ old('province') == 'Sabaragamuwa' ? 'selected' : '' }}>Sabaragamuwa Province</option>
+                    </select>
+                </div>
+                <x-input-error :messages="$errors->get('province')" class="mt-2" />
+            </div>
+
+            <!-- District -->
+            <div>
+                <label for="district" class="block text-sm font-medium text-gray-700">{{ __('auth.district') ?? 'District' }}</label>
+                <div class="mt-1">
+                    <select id="district" name="district" class="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm bg-white focus:outline-none focus:ring-brand-500 focus:border-brand-500 sm:text-sm transition-colors">
+                        <option value="" disabled selected>{{ __('auth.select_district') ?? 'Select your district' }}</option>
+                        @php
+                        $districtsByProvince = [
+                            'Western'       => ['Colombo', 'Gampaha', 'Kalutara'],
+                            'Central'       => ['Kandy', 'Matale', 'Nuwara Eliya'],
+                            'Southern'      => ['Galle', 'Matara', 'Hambantota'],
+                            'Northern'      => ['Jaffna', 'Kilinochchi', 'Mannar', 'Mullaitivu', 'Vavuniya'],
+                            'Eastern'       => ['Ampara', 'Batticaloa', 'Trincomalee'],
+                            'North Western' => ['Kurunegala', 'Puttalam'],
+                            'North Central' => ['Anuradhapura', 'Polonnaruwa'],
+                            'Uva'           => ['Badulla', 'Monaragala'],
+                            'Sabaragamuwa'  => ['Ratnapura', 'Kegalle'],
+                        ];
+                        $allDistricts = array_merge(...array_values($districtsByProvince));
+                        @endphp
+                        @foreach($allDistricts as $d)
+                            <option value="{{ $d }}" {{ old('district') == $d ? 'selected' : '' }}>{{ $d }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <x-input-error :messages="$errors->get('district')" class="mt-2" />
+            </div>
         </div>
 
-        <!-- Email Address (Customers) -->
-        <div id="email_container">
-            <label for="email" class="block text-sm font-medium text-gray-700">{{ __('auth.email') ?? 'Email Address' }}</label>
-            <div class="mt-1">
-                <input id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="username" 
-                    class="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-brand-500 focus:border-brand-500 sm:text-sm transition-colors">
-            </div>
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Phone Number (Workers) -->
-        <div id="phone_container" style="display: none;">
+        <!-- Phone Number -->
+        <div id="phone_container">
             <label for="phone_number" class="block text-sm font-medium text-gray-700">Phone Number</label>
             <div class="mt-1">
-                <input id="phone_number" type="tel" name="phone_number" value="{{ old('phone_number') }}" autocomplete="tel" placeholder="07XXXXXXXX"
+                <input id="phone_number" type="tel" name="phone_number" value="{{ old('phone_number') }}" required autocomplete="tel" placeholder="07XXXXXXXX"
                     class="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-brand-500 focus:border-brand-500 sm:text-sm transition-colors">
             </div>
             <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
@@ -133,40 +180,54 @@
     </form>
 
     <script>
+        const districtsByProvince = {
+            'Western':       ['Colombo', 'Gampaha', 'Kalutara'],
+            'Central':       ['Kandy', 'Matale', 'Nuwara Eliya'],
+            'Southern':      ['Galle', 'Matara', 'Hambantota'],
+            'Northern':      ['Jaffna', 'Kilinochchi', 'Mannar', 'Mullaitivu', 'Vavuniya'],
+            'Eastern':       ['Ampara', 'Batticaloa', 'Trincomalee'],
+            'North Western': ['Kurunegala', 'Puttalam'],
+            'North Central': ['Anuradhapura', 'Polonnaruwa'],
+            'Uva':           ['Badulla', 'Monaragala'],
+            'Sabaragamuwa':  ['Ratnapura', 'Kegalle'],
+        };
+
+        function filterDistricts(province) {
+            const districtSelect = document.getElementById('district');
+            const currentDistrict = '{{ old('district') }}';
+            districtSelect.innerHTML = '<option value="" disabled selected>{{ __("auth.select_district") ?? "Select your district" }}</option>';
+            const districts = districtsByProvince[province] || [];
+            districts.forEach(d => {
+                const opt = document.createElement('option');
+                opt.value = d;
+                opt.textContent = d;
+                if (d === currentDistrict) opt.selected = true;
+                districtSelect.appendChild(opt);
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             const roleRadios = document.querySelectorAll('input[name="role"]');
-            const jobNameContainer = document.getElementById('job_name_container');
+            const workerFieldsContainer = document.getElementById('worker_fields_container');
             const jobNameSelect = document.getElementById('job_name');
-            const emailContainer = document.getElementById('email_container');
-            const emailInput = document.getElementById('email');
-            const phoneContainer = document.getElementById('phone_container');
-            const phoneInput = document.getElementById('phone_number');
+            const provinceSelect = document.getElementById('province');
+            const districtSelect = document.getElementById('district');
 
             function toggleRoleFields() {
                 const selectedRole = document.querySelector('input[name="role"]:checked')?.value;
                 if (selectedRole === 'worker') {
-                    // Show Worker fields
-                    jobNameContainer.style.display = 'block';
+                    workerFieldsContainer.style.display = 'block';
                     jobNameSelect.setAttribute('required', 'required');
-                    phoneContainer.style.display = 'block';
-                    phoneInput.setAttribute('required', 'required');
-                    
-                    // Hide Customer fields
-                    emailContainer.style.display = 'none';
-                    emailInput.removeAttribute('required');
-                    emailInput.value = ''; 
+                    provinceSelect.setAttribute('required', 'required');
+                    districtSelect.setAttribute('required', 'required');
                 } else {
-                    // Show Customer fields
-                    emailContainer.style.display = 'block';
-                    emailInput.setAttribute('required', 'required');
-                    
-                    // Hide Worker fields
-                    jobNameContainer.style.display = 'none';
+                    workerFieldsContainer.style.display = 'none';
                     jobNameSelect.removeAttribute('required');
-                    jobNameSelect.value = ''; 
-                    phoneContainer.style.display = 'none';
-                    phoneInput.removeAttribute('required');
-                    phoneInput.value = '';
+                    jobNameSelect.value = '';
+                    provinceSelect.removeAttribute('required');
+                    provinceSelect.value = '';
+                    districtSelect.removeAttribute('required');
+                    districtSelect.value = '';
                 }
             }
 
@@ -174,7 +235,12 @@
                 radio.addEventListener('change', toggleRoleFields);
             });
 
-            // Initial check on load (for validation errors / old input)
+            // On page load: restore old province and filter districts
+            const oldProvince = '{{ old('province') }}';
+            if (oldProvince) {
+                filterDistricts(oldProvince);
+            }
+
             toggleRoleFields();
         });
     </script>
