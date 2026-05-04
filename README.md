@@ -1,58 +1,105 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# HireMate LK 🛠️
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**HireMate LK** is a modern, professional service marketplace designed specifically for the Sri Lankan market. It connects home and business owners with verified, skilled professionals across various industries, from masonry and plumbing to electrical and specialized technical services.
 
-## About Laravel
+![Platform Preview](https://via.placeholder.com/1200x600/0d9488/ffffff?text=HireMate+LK+Platform+Preview)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🌟 Key Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Advanced Worker Directory**: Search for professionals using a multi-layer filtering system (Job Category, Province, and District).
+- **Premium Worker Profiles**: High-impact profiles featuring verified badges, skill summaries, and location-based data.
+- **One-Click Contact**: Seamless "Contact Now" integration for direct communication with service providers.
+- **Phone-First Authentication**: Simplified registration and login process using phone numbers for better accessibility in the local market.
+- **Trilingual Support**: Fully localized in **English**, **Sinhala (සිංහල)**, and **Tamil (தமிழ்)**.
+- **Responsive Design**: A "Stability-First" UI that looks stunning on mobile, tablet, and desktop devices.
+- **Green-Themed Branding**: A fresh, professional Teal Green aesthetic that inspires trust and reliability.
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 🛠️ Technology Stack
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Framework**: [Laravel 11](https://laravel.com/)
+- **Frontend**: [Tailwind CSS](https://tailwindcss.com/), [Alpine.js](https://alpinejs.dev/)
+- **Templating**: Laravel Blade
+- **Database**: MySQL
+- **Icons**: [Heroicons](https://heroicons.com/)
+- **Fonts**: [Outfit](https://fonts.google.com/specimen/Outfit) (Headings) & [Inter](https://fonts.google.com/specimen/Inter) (Body)
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+---
 
-## Agentic Development
+## 🚀 Getting Started
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+### Prerequisites
 
-```bash
-composer require laravel/boost --dev
+- PHP >= 8.2
+- Composer
+- Node.js & NPM
+- MySQL
 
-php artisan boost:install
-```
+### Installation
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/ChandupaJay1/hiremate_lk.git
+   cd hiremate_lk
+   ```
 
-## Contributing
+2. **Install dependencies:**
+   ```bash
+   composer install
+   npm install
+   ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+3. **Environment Setup:**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-## Code of Conduct
+4. **Configure Database:**
+   Update the database credentials in your `.env` file:
+   ```env
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=hiremate_lk
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+5. **Run Migrations:**
+   ```bash
+   php artisan migrate
+   ```
 
-## Security Vulnerabilities
+6. **Compile Assets & Start Server:**
+   ```bash
+   npm run dev
+   php artisan serve
+   ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+## 📂 Project Structure
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- `app/Http/Controllers/WorkerController.php`: Manages the directory logic and filtering system.
+- `resources/views/workers/index.blade.php`: The main worker search interface.
+- `resources/views/workers/show.blade.php`: Detailed professional profile layout.
+- `resources/lang/`: Contains all trilingual translation files.
+- `resources/views/layouts/navigation.blade.php`: Modern, responsive navigation system.
+
+---
+
+## 📄 License
+
+This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+---
+
+## 🤝 Contact
+
+For support or inquiries, please contact:
+- **Email**: support@hiremate.lk
+- **Website**: [www.hiremate.lk](http://www.hiremate.lk)

@@ -45,12 +45,17 @@
             <!-- Left Side: Form Container -->
             <div class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24 bg-white shadow-2xl z-10 w-full lg:max-w-2xl relative">
                 
-                <!-- Back/Home Link -->
-                <div class="absolute top-8 left-8">
-                    <a href="{{ url('/') }}" class="flex items-center text-sm font-medium text-gray-500 hover:text-brand-600 transition-colors">
-                        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                <!-- Back/Home Link & Language Switcher -->
+                <div class="absolute top-8 left-8 right-8 flex flex-wrap justify-between items-center gap-4">
+                    <a href="{{ url('/') }}" class="flex items-center text-sm font-bold uppercase tracking-widest text-gray-400 hover:text-teal-600 transition-colors">
+                        <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                         Back to Home
                     </a>
+                    <div class="flex items-center gap-1.5 bg-gray-50 p-1 rounded-lg border border-gray-100">
+                        <a href="?lang=en" class="px-2.5 py-1 text-[10px] font-black rounded-md {{ app()->getLocale() == 'en' ? 'bg-white text-teal-600 shadow-sm' : 'text-gray-400 hover:bg-gray-100' }}">EN</a>
+                        <a href="?lang=si" class="px-2.5 py-1 text-[10px] font-black rounded-md {{ app()->getLocale() == 'si' ? 'bg-white text-teal-600 shadow-sm' : 'text-gray-400 hover:bg-gray-100' }}">සිං</a>
+                        <a href="?lang=ta" class="px-2.5 py-1 text-[10px] font-black rounded-md {{ app()->getLocale() == 'ta' ? 'bg-white text-teal-600 shadow-sm' : 'text-gray-400 hover:bg-gray-100' }}">தமி</a>
+                    </div>
                 </div>
 
                 <div class="mx-auto w-full max-w-sm lg:w-96">

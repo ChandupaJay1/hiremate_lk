@@ -33,7 +33,13 @@ return [
 'worker' => 'Worker',
 'phone' => 'Phone Number',
 'address' => 'Address',
-'skills' => 'Skills/Services',
-'select_role' => 'Please select your role',
+    'skills'           => 'Skills/Services',
+    'select_role'      => 'Please select your role',
+    'job_name'         => 'Job / Profession',
+    'select_profession'=> 'Select your profession',
+    'district'         => 'District',
+    'select_district'  => 'Select your district',
+    'province'         => 'Province',
+    'select_province'  => 'Select your province',
 
 ];

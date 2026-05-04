@@ -33,25 +33,26 @@ class RegisteredUserController extends Controller
         $rules = [
             'name' => ['required', 'string', 'max:255'],
             'role' => ['required', 'in:customer,worker'],
+            'phone_number' => ['required', 'string', 'max:20', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ];
 
-        if ($request->role === 'customer') {
-            $rules['email'] = ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class];
-        } else {
-            $rules['phone_number'] = ['required', 'string', 'max:20', 'unique:'.User::class];
+        if ($request->role === 'worker') {
             $rules['job_name'] = ['required', 'string', 'max:255'];
+            $rules['district'] = ['required', 'string', 'max:100'];
+            $rules['province'] = ['required', 'string', 'max:100'];
         }
 
         $request->validate($rules);
 
         $user = User::create([
-            'name' => $request->name,
-            'role' => $request->role,
-            'email' => $request->role === 'customer' ? $request->email : null,
-            'phone_number' => $request->role === 'worker' ? $request->phone_number : null,
-            'job_name' => $request->role === 'worker' ? $request->job_name : null,
-            'password' => Hash::make($request->password),
+            'name'         => $request->name,
+            'role'         => $request->role,
+            'phone_number' => $request->phone_number,
+            'job_name'     => $request->role === 'worker' ? $request->job_name : null,
+            'district'     => $request->role === 'worker' ? $request->district : null,
+            'province'     => $request->role === 'worker' ? $request->province : null,
+            'password'     => Hash::make($request->password),
         ]);
 
         event(new Registered($user));
