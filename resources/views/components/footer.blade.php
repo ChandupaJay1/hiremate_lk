@@ -36,7 +36,10 @@
 
         <div class="pt-8 flex flex-col md:flex-row justify-between items-center gap-4" style="font-size: 12px; color: #6b7280; font-weight: 700; text-transform: uppercase; tracking: 0.1em;">
             <p>&copy; {{ date('Y') }} HireMate LK. All rights reserved.</p>
-            <div class="flex gap-6">
+            <div class="flex items-center gap-6">
+                <a href="{{ route('contact') }}" class="bg-brand-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-brand-600 transition-colors text-sm">
+                    Contact Us
+                </a>
                 <a href="#" class="hover:text-white transition">Privacy</a>
                 <a href="#" class="hover:text-white transition">Terms</a>
             </div>

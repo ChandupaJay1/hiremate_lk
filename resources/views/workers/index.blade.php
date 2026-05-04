@@ -85,12 +85,12 @@
                                 {{ $worker->job_name ?? 'Professional Worker' }}
                             </span>
                             @if($worker->district)
-                                <div class="flex items-center justify-center gap-2 px-4 py-1.5 bg-gray-50 rounded-full border border-gray-100 mb-4">
-                                    <svg style="width: 14px; height: 14px; color: #6b7280;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="flex items-center justify-center gap-2.5 px-4 py-2 bg-brand-50/50 rounded-full border border-brand-100/50 mb-4">
+                                    <svg class="w-6 h-6 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                     </svg>
-                                    <span style="font-size: 13px; font-weight: 600; color: #4b5563;">
+                                    <span class="text-sm text-gray-500 font-medium">
                                         {{ $worker->district }}{{ $worker->province ? ', ' . $worker->province : '' }}
                                     </span>
                                 </div>

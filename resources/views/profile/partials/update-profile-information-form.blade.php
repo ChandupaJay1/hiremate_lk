@@ -25,10 +25,9 @@
                 {{ $percent }}%
             </span>
         </div>
-        <div class="w-full bg-gray-200 rounded-full h-2.5 overflow-hidden">
-            <div class="h-2.5 rounded-full transition-all duration-500
-                {{ $percent >= 80 ? 'bg-green-500' : ($percent >= 50 ? 'bg-amber-500' : 'bg-red-400') }}"
-                style="width: {{ $percent }}%"></div>
+        <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden shadow-inner">
+            <div class="h-full rounded-full transition-all duration-700 ease-out bg-brand-600 shadow-lg shadow-brand-500/20"
+                style="width: {{ $percent }}%; min-width: {{ $percent > 0 ? '4px' : '0' }};"></div>
         </div>
         @if($percent < 100)
             <p class="mt-2 text-xs text-gray-500">

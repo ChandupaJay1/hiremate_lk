@@ -1,6 +1,6 @@
 <nav class="fixed w-full z-50 transition-all duration-300 bg-white/80 backdrop-blur-md border-b border-gray-200" id="navbar">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-20">
+        <div class="flex justify-between items-center h-16">
             <div class="flex items-center gap-2">
                 <a href="{{ url('/') }}" class="flex items-center gap-2">
                     <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center text-white font-heading font-bold text-xl shadow-lg">
