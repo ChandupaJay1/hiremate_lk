@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <link rel="icon" type="image/png" href="{{ asset('images/fav_icon.png') }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -42,6 +43,7 @@
         @endif
     </head>
     <body class="font-sans antialiased text-gray-900 bg-gray-50">
+        <x-preloader />
         <div class="min-h-screen flex flex-col">
             <!-- Main Navbar -->
             @include('layouts.navigation')

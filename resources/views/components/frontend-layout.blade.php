@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/fav_icon.png') }}">
 
     <title>{{ $title ?? 'HireMate LK - Find Trusted Workers' }}</title>
 
@@ -63,9 +64,11 @@
 </head>
 <body class="font-sans antialiased text-gray-900 bg-gray-50 selection:bg-brand-500 selection:text-white min-h-screen flex flex-col">
 
+    <x-preloader />
+
     <x-navbar />
 
-    <main class="flex-grow pt-20">
+    <main class="flex-grow pt-16">
         {{ $slot }}
     </main>
 

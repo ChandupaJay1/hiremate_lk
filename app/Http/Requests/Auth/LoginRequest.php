@@ -43,14 +43,20 @@ class LoginRequest extends FormRequest
         $this->ensureIsNotRateLimited();
 
         $loginId = $this->input('login_id');
-        $field = 'phone_number';
-
-        if (! Auth::attempt([$field => $loginId, 'password' => $this->input('password')], $this->boolean('remember'))) {
-            RateLimiter::hit($this->throttleKey());
-
-            throw ValidationException::withMessages([
-                'login_id' => trans('auth.failed'),
-            ]);
+        
+        // Check if it's an email (Admin) or Phone (User)
+        if (filter_var($loginId, FILTER_VALIDATE_EMAIL)) {
+            // Attempt Admin login via dedicated admin guard
+            if (! Auth::guard('admin')->attempt(['email' => $loginId, 'password' => $this->input('password')], $this->boolean('remember'))) {
+                RateLimiter::hit($this->throttleKey());
+                throw ValidationException::withMessages(['login_id' => trans('auth.failed')]);
+            }
+        } else {
+            // Attempt User login (Phone)
+            if (! Auth::attempt(['phone_number' => $loginId, 'password' => $this->input('password')], $this->boolean('remember'))) {
+                RateLimiter::hit($this->throttleKey());
+                throw ValidationException::withMessages(['login_id' => trans('auth.failed')]);
+            }
         }
 
         RateLimiter::clear($this->throttleKey());

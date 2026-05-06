@@ -1,18 +1,12 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
+    <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             
             <!-- Welcome Section -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6">
-                <div class="p-6 text-gray-900">
-                    <h3 class="text-lg font-bold">Ayubowan, {{ auth()->user()->name }}!</h3>
-                    <p class="text-gray-600">Welcome to your HireMate LK dashboard.</p>
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-10">
+                <div class="p-4 text-gray-900">
+                    <h3 class="text-base font-bold leading-tight">Ayubowan, {{ auth()->user()->name }}!</h3>
+                    <p class="text-sm text-gray-600">Welcome to your HireMate LK dashboard.</p>
                 </div>
             </div>
 
@@ -61,7 +55,7 @@
                 @endphp
 
                 <!-- Stats Row -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
                     <div class="bg-white p-4 shadow-sm rounded-lg border border-gray-100">
                         <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Strength</p>
                         <p class="text-2xl font-black text-brand-600">{{ $percent }}%</p>
@@ -80,50 +74,56 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
                     <!-- Profile Card -->
-                    <div class="lg:col-span-2">
+                    <div class="md:col-span-2">
                         <div class="bg-white shadow-sm rounded-lg border border-gray-100 overflow-hidden">
                             <div class="p-6 border-b border-gray-100 bg-gray-50/50">
                                 <h4 class="font-bold">My Profile Summary</h4>
                             </div>
                             <div class="p-6">
-                                <div class="flex items-center gap-6 mb-8">
-                                    <div class="w-20 h-20 bg-brand-500 text-white rounded-full flex items-center justify-center text-3xl font-bold">
+                                <div class="flex items-center gap-8 mb-10">
+                                    <div class="w-24 h-24 bg-brand-500 text-white rounded-2xl flex items-center justify-center text-4xl font-bold shadow-lg shadow-brand-500/20">
                                         {{ strtoupper(substr($user->name, 0, 1)) }}
                                     </div>
-                                    <div>
-                                        <h5 class="text-xl font-bold">{{ $user->name }}</h5>
-                                        <p class="text-gray-500">{{ $user->job_name ?? 'Not Set' }}</p>
-                                        <p class="text-sm text-gray-400">{{ $user->district ?? 'Sri Lanka' }}</p>
+                                    <div class="space-y-1">
+                                        <h5 class="text-2xl font-bold text-gray-900 leading-tight">{{ $user->name }}</h5>
+                                        <p class="text-base text-gray-500 font-medium">{{ $user->job_name ?? 'Not Set' }}</p>
+                                        <p class="flex items-center gap-2 mt-1">
+                                            <svg class="w-6 h-6 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                            </svg>
+                                            <span class="text-sm font-medium text-gray-400">{{ $user->district ?? 'Sri Lanka' }}</span>
+                                        </p>
                                     </div>
                                 </div>
 
-                                <div class="space-y-4">
+                                <div class="space-y-6">
                                     <div>
-                                        <div class="flex justify-between text-sm mb-1">
-                                            <span class="font-medium text-gray-600">Profile Completion</span>
-                                            <span class="font-bold text-brand-600">{{ $percent }}%</span>
+                                        <div class="flex justify-between text-sm mb-2">
+                                            <span class="font-bold text-gray-600">Profile Completion</span>
+                                            <span class="font-black text-brand-600">{{ $percent }}%</span>
                                         </div>
-                                        <div class="w-full bg-gray-100 rounded-full h-2">
-                                            <div class="bg-brand-500 h-2 rounded-full" style="width: {{ $percent }}%"></div>
+                                        <div class="w-full bg-gray-100 rounded-full h-2.5">
+                                            <div class="bg-brand-500 h-2.5 rounded-full" style="width: {{ $percent }}%"></div>
                                         </div>
                                     </div>
                                     
-                                    <div class="flex gap-4 pt-4">
-                                        <a href="{{ route('workers.show', $user) }}" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-md font-bold text-sm transition-colors">
+                                    <div class="flex gap-6 pt-6 border-t border-gray-50">
+                                        <a href="{{ route('workers.show', $user) }}" class="px-6 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl font-bold text-sm transition-all">
                                             View Public Profile
                                         </a>
-                                        <a href="{{ route('profile.edit') }}" class="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-md font-bold text-sm transition-colors">
+                                        <a href="{{ route('profile.edit') }}" class="px-6 py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl font-bold text-sm transition-all shadow-lg shadow-brand-600/20">
                                             Edit Profile
                                         </a>
                                     </div>
                                 </div>
-                            </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Side Column -->
+                <!-- Side Column -->
                     <div class="space-y-6">
                         <div class="bg-white p-6 shadow-sm rounded-lg border border-gray-100">
                             <h4 class="font-bold mb-4">Quick Actions</h4>
