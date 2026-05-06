@@ -3,15 +3,55 @@
         <div class="flex justify-between items-center h-16">
             <div class="flex items-center gap-2">
                 <a href="{{ url('/') }}" class="flex items-center gap-2">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center text-white font-heading font-bold text-xl shadow-lg">
-                        H
-                    </div>
+                    <img src="{{ asset('images/fav_icon.png') }}" alt="HireMate LK Logo" class="w-10 h-10 object-contain rounded-xl shadow-lg">
                     <h1 class="text-2xl font-heading font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600">HireMate LK</h1>
                 </a>
             </div>
             <div class="hidden md:flex items-center space-x-6">
                 <!-- Navigation Links -->
-                <a href="{{ route('workers.index') }}" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">Find Workers</a>
+                <a href="{{ route('workers.index') }}" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">{{ __('home.find_workers') }}</a>
+                <a href="{{ route('about') }}" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">{{ __('home.about_us') }}</a>
+
+                @auth
+                    @if(auth()->user()->role === 'worker')
+                        <a href="{{ url('/dashboard') }}" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">{{ __('home.dashboard') }}</a>
+                    @endif
+                    <div class="relative ml-4">
+                        <x-dropdown align="right" width="48">
+                            <x-slot name="trigger">
+                                <button class="flex items-center p-1 rounded-xl hover:bg-gray-50 transition-all duration-200 group border border-transparent hover:border-gray-100 focus:outline-none">
+                                    <div class="w-10 h-10 rounded-xl bg-brand-600 flex items-center justify-center text-white text-sm font-black shadow-sm group-hover:shadow-md transition-all ring-4 ring-transparent group-hover:ring-brand-50">
+                                        {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                                    </div>
+                                </button>
+                            </x-slot>
+
+                            <x-slot name="content">
+                                @if(auth()->user()->role === 'admin')
+                                    <x-dropdown-link :href="route('admin.profile.edit')">
+                                        {{ __('home.profile') }}
+                                    </x-dropdown-link>
+                                @else
+                                    <x-dropdown-link :href="route('profile.edit')">
+                                        {{ __('home.profile') }}
+                                    </x-dropdown-link>
+                                @endif
+
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <x-dropdown-link :href="route('logout')"
+                                            onclick="event.preventDefault();
+                                                        this.closest('form').submit();" class="text-red-600 font-bold">
+                                        {{ __('home.logout') }}
+                                    </x-dropdown-link>
+                                </form>
+                            </x-slot>
+                        </x-dropdown>
+                    </div>
+                @else
+                    <a href="{{ route('login') }}" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">{{ __('home.login') }}</a>
+                    <a href="{{ route('register') }}" class="bg-gray-900 text-white px-6 py-2.5 rounded-full font-medium hover:bg-brand-600 hover:shadow-lg hover:shadow-brand-500/30 transition-all duration-300 transform hover:-translate-y-0.5">{{ __('home.register') }}</a>
+                @endauth
 
                 <!-- Language Switcher -->
                 <div class="relative group">
@@ -22,19 +62,6 @@
                     </select>
                     <svg class="w-4 h-4 text-gray-500 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
-
-                @auth
-                    <a href="{{ url('/dashboard') }}" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">Dashboard</a>
-                    <form method="POST" action="{{ route('logout') }}" class="inline">
-                        @csrf
-                        <button type="submit" class="text-gray-600 hover:text-red-600 font-medium transition-colors ml-4">
-                            {{ __('Log Out') }}
-                        </button>
-                    </form>
-                @else
-                    <a href="{{ route('login') }}" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">{{ __('home.login') ?? 'Log in' }}</a>
-                    <a href="{{ route('register') }}" class="bg-gray-900 text-white px-6 py-2.5 rounded-full font-medium hover:bg-brand-600 hover:shadow-lg hover:shadow-brand-500/30 transition-all duration-300 transform hover:-translate-y-0.5">{{ __('home.register') ?? 'Sign up' }}</a>
-                @endauth
             </div>
         </div>
     </div>

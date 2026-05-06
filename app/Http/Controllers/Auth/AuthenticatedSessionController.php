@@ -28,6 +28,14 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        if (auth()->guard('admin')->check()) {
+            return redirect()->route('admin.dashboard');
+        }
+
+        if (auth()->user()->role === 'customer') {
+            return redirect()->intended(route('workers.index', absolute: false));
+        }
+
         return redirect()->intended(route('dashboard', absolute: false));
     }
 
@@ -37,6 +45,7 @@ class AuthenticatedSessionController extends Controller
     public function destroy(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
+        Auth::guard('admin')->logout();
 
         $request->session()->invalidate();
 

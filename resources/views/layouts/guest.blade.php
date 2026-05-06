@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <link rel="icon" type="image/png" href="{{ asset('images/fav_icon.png') }}">
 
         <title>{{ __('home.title') ?? 'HireMate LK - Authentication' }}</title>
 
@@ -41,6 +42,7 @@
         @endif
     </head>
     <body class="font-sans text-gray-900 antialiased bg-gray-50">
+        <x-preloader />
         <div class="min-h-screen flex">
             <!-- Left Side: Form Container -->
             <div class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24 bg-white shadow-2xl z-10 w-full lg:max-w-2xl relative">

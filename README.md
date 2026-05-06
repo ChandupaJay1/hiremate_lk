@@ -1,105 +1,102 @@
-# HireMate LK 🛠️
-
-**HireMate LK** is a modern, professional service marketplace designed specifically for the Sri Lankan market. It connects home and business owners with verified, skilled professionals across various industries, from masonry and plumbing to electrical and specialized technical services.
-
-![Platform Preview](https://via.placeholder.com/1200x600/0d9488/ffffff?text=HireMate+LK+Platform+Preview)
-
----
-
-## 🌟 Key Features
-
-- **Advanced Worker Directory**: Search for professionals using a multi-layer filtering system (Job Category, Province, and District).
-- **Premium Worker Profiles**: High-impact profiles featuring verified badges, skill summaries, and location-based data.
-- **One-Click Contact**: Seamless "Contact Now" integration for direct communication with service providers.
-- **Phone-First Authentication**: Simplified registration and login process using phone numbers for better accessibility in the local market.
-- **Trilingual Support**: Fully localized in **English**, **Sinhala (සිංහල)**, and **Tamil (தமிழ்)**.
-- **Responsive Design**: A "Stability-First" UI that looks stunning on mobile, tablet, and desktop devices.
-- **Green-Themed Branding**: A fresh, professional Teal Green aesthetic that inspires trust and reliability.
+<div align="center">
+  <h1>🛠️ HireMate LK</h1>
+  <p><strong>A modern, trilingual service worker directory and management platform tailored for the Sri Lankan market.</strong></p>
+</div>
 
 ---
 
-## 🛠️ Technology Stack
+## 📖 About the Project
 
-- **Framework**: [Laravel 11](https://laravel.com/)
-- **Frontend**: [Tailwind CSS](https://tailwindcss.com/), [Alpine.js](https://alpinejs.dev/)
-- **Templating**: Laravel Blade
-- **Database**: MySQL
-- **Icons**: [Heroicons](https://heroicons.com/)
-- **Fonts**: [Outfit](https://fonts.google.com/specimen/Outfit) (Headings) & [Inter](https://fonts.google.com/specimen/Inter) (Body)
+**HireMate LK** is a comprehensive platform designed to connect users with service workers seamlessly. Built with a focus on localized user experience, the application offers full trilingual support (English, Sinhala, and Tamil) and a beautiful, responsive UI that switches between Light and Dark modes.
+
+The platform provides dedicated dashboards for standard users, service workers, and administrators, making it easy to find workers, manage profiles, and oversee platform analytics.
+
+## ✨ Key Features
+
+- 🌍 **Trilingual Localization:** Full support for English, Sinhala, and Tamil across all user interfaces, including the Worker Directory and Dashboards.
+- 👨‍🔧 **Worker Directory & Search:** A filterable grid of registered workers with advanced search capabilities and dynamic "Contact Now" functionality.
+- 🔐 **Multi-Guard Authentication:** Secure, role-based login system separating standard users, service workers, and administrators. Uses phone-number-based identification for local accessibility.
+- 📊 **Admin Dashboard:** A powerful administrative panel with profile management, password resets, platform analytics, and user registry tracking.
+- 💳 **Modern Payment & Billing:** Premium UI for the bill creation view and payment interfaces.
+- 🎨 **Premium Aesthetic UI:** A responsive, state-of-the-art interface featuring Teal branding, micro-animations, and full Dark/Light mode compatibility.
+
+## 💻 Tech Stack
+
+- **Backend:** [Laravel 13](https://laravel.com/) (PHP 8.3+)
+- **Frontend:** Blade Templating, Vanilla CSS (Modern CSS / Custom Design System), JavaScript, Vite
+- **Database:** MySQL / SQLite
+- **Environment:** Composer, NPM
 
 ---
 
 ## 🚀 Getting Started
 
+Follow these instructions to get a copy of the project up and running on your local machine for development and testing.
+
 ### Prerequisites
 
-- PHP >= 8.2
-- Composer
-- Node.js & NPM
-- MySQL
+Make sure you have the following installed on your local development environment:
+- **PHP** >= 8.3.0
+- **Composer**
+- **Node.js** & **NPM**
+- **MySQL** or **MariaDB** (XAMPP/WAMP/Laragon)
 
 ### Installation
 
-1. **Clone the repository:**
+1. **Clone the repository** (if applicable):
    ```bash
-   git clone https://github.com/ChandupaJay1/hiremate_lk.git
-   cd hiremate_lk
+   git clone https://github.com/yourusername/hirematelk.git
+   cd HireMate_LK
    ```
 
-2. **Install dependencies:**
+2. **Install PHP dependencies:**
    ```bash
    composer install
+   ```
+
+3. **Install frontend dependencies:**
+   ```bash
    npm install
    ```
 
-3. **Environment Setup:**
+4. **Set up environment variables:**
+   Duplicate the `.env.example` file and rename it to `.env`.
    ```bash
    cp .env.example .env
+   ```
+   *Update the `.env` file with your database credentials and application URL.*
+
+5. **Generate the application key:**
+   ```bash
    php artisan key:generate
    ```
 
-4. **Configure Database:**
-   Update the database credentials in your `.env` file:
-   ```env
-   DB_CONNECTION=mysql
-   DB_HOST=127.0.0.1
-   DB_PORT=3306
-   DB_DATABASE=hiremate_lk
-   DB_USERNAME=root
-   DB_PASSWORD=
-   ```
-
-5. **Run Migrations:**
+6. **Run database migrations (and seeders if available):**
    ```bash
    php artisan migrate
    ```
 
-6. **Compile Assets & Start Server:**
+7. **Compile frontend assets:**
    ```bash
    npm run dev
-   php artisan serve
    ```
 
----
-
-## 📂 Project Structure
-
-- `app/Http/Controllers/WorkerController.php`: Manages the directory logic and filtering system.
-- `resources/views/workers/index.blade.php`: The main worker search interface.
-- `resources/views/workers/show.blade.php`: Detailed professional profile layout.
-- `resources/lang/`: Contains all trilingual translation files.
-- `resources/views/layouts/navigation.blade.php`: Modern, responsive navigation system.
+8. **Start the local development server:**
+   ```bash
+   php artisan serve
+   ```
+   Visit `http://localhost:8000` in your browser.
 
 ---
 
-## 📄 License
+## 🌐 Deployment Notes (e.g., InfinityFree)
 
-This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+If you are deploying this application to a shared hosting environment (like InfinityFree) running an older PHP version (e.g., `8.3.19`), ensure that your `composer.json` is configured correctly:
+- The platform config is set to enforce PHP 8.3 compatibility: `"platform": { "php": "8.3.19" }`
+- Always run `composer update` locally before uploading the `vendor` directory and `composer.lock` to the remote server to prevent `platform_check.php` errors.
 
 ---
 
-## 🤝 Contact
+## 🛡️ License
 
-For support or inquiries, please contact:
-- **Email**: support@hiremate.lk
-- **Website**: [www.hiremate.lk](http://www.hiremate.lk)
+This project is open-source and licensed under the [MIT License](LICENSE).
