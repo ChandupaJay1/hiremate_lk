@@ -21,7 +21,11 @@ class NewPasswordController extends Controller
      */
     public function create(Request $request): View
     {
-        return view('auth.reset-password', ['request' => $request]);
+        if (!session('reset_phone_number')) {
+            return redirect()->route('password.request');
+        }
+
+        return view('auth.verify-otp');
     }
 
     /**
@@ -32,32 +36,44 @@ class NewPasswordController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'token' => ['required'],
-            'email' => ['required', 'email'],
+            'otp' => ['required', 'numeric', 'digits:4'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        // Here we will attempt to reset the user's password. If it is successful we
-        // will update the password on an actual user model and persist it to the
-        // database. Otherwise we will parse the error and return the response.
-        $status = Password::reset(
-            $request->only('email', 'password', 'password_confirmation', 'token'),
-            function (User $user) use ($request) {
-                $user->forceFill([
-                    'password' => Hash::make($request->password),
-                    'remember_token' => Str::random(60),
-                ])->save();
+        $phoneNumber = session('reset_phone_number');
 
-                event(new PasswordReset($user));
-            }
-        );
+        if (!$phoneNumber) {
+            return redirect()->route('password.request')->withErrors(['login_id' => 'Session expired. Please try again.']);
+        }
 
-        // If the password was successfully reset, we will redirect the user back to
-        // the application's home authenticated view. If there is an error we can
-        // redirect them back to where they came from with their error message.
-        return $status == Password::PASSWORD_RESET
-                    ? redirect()->route('login')->with('status', __($status))
-                    : back()->withInput($request->only('email'))
-                        ->withErrors(['email' => __($status)]);
+        $record = \Illuminate\Support\Facades\DB::table('password_reset_tokens')
+            ->where('phone_number', $phoneNumber)
+            ->first();
+
+        if (!$record || !Hash::check($request->otp, $record->token)) {
+            return back()->withErrors(['otp' => 'The provided OTP is invalid.']);
+        }
+
+        $user = User::where('phone_number', $phoneNumber)->first();
+
+        if (!$user) {
+            return back()->withErrors(['otp' => 'User not found.']);
+        }
+
+        $user->forceFill([
+            'password' => Hash::make($request->password),
+            'remember_token' => Str::random(60),
+        ])->save();
+
+        event(new PasswordReset($user));
+
+        // Delete the token
+        \Illuminate\Support\Facades\DB::table('password_reset_tokens')
+            ->where('phone_number', $phoneNumber)
+            ->delete();
+
+        session()->forget('reset_phone_number');
+
+        return redirect()->route('login')->with('status', 'Your password has been reset successfully. Please login.');
     }
 }
